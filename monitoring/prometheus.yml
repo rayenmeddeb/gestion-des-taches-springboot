@@ -1,0 +1,29 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - localhost:9093
+
+rule_files:
+  - "rules.yml"
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'windows'
+    static_configs:
+      - targets: ['windows-exporter:9182']
+
+  - job_name: 'iis'
+    static_configs:
+      - targets: ['iis-exporter:9182']
+
+  - job_name: 'ansible'
+    static_configs:
+      - targets: ['ansible-exporter:9182']
